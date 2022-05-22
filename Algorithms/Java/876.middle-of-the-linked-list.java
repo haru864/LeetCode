@@ -16,23 +16,18 @@
  * }
  */
 class Solution {
+
     public ListNode middleNode(ListNode head) {
-        int count = 0;
-        var currNode = head;
 
-        while (currNode != null) {
-            count++;
-            currNode = currNode.next;
-        }
-        System.out.println(count);
+        var slowNode = head;
+        var fastNode = head;
 
-        count /= 2;
-        while (count > 0) {
-            head = head.next;
-            count--;
+        while (fastNode != null && fastNode.next != null) {
+            slowNode = slowNode.next;
+            fastNode = fastNode.next.next;
         }
 
-        return head;
+        return slowNode;
     }
 }
 // @lc code=end

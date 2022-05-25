@@ -15,7 +15,10 @@ class Solution {
 
         for (var n : nums) {
             map.put(n, map.getOrDefault(n, 0) + 1);
-            if (map.get(n) > 1)
+        }
+
+        for (var key : map.keySet()) {
+            if (map.get(key) >= 2)
                 return true;
         }
 

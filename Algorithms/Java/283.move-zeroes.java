@@ -1,3 +1,7 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
+
 /*
  * @lc app=leetcode id=283 lang=java
  *
@@ -9,19 +13,19 @@ class Solution {
 
     public void moveZeroes(int[] nums) {
 
+        Queue<Integer> q = new ArrayDeque<>();
+
         for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                q.add(i);
+            }
+        }
 
-            int idx = -1;
-
-            for (int j = i; j < nums.length; j++) {
-
-                if (nums[j] != 0 && idx != -1) {
-                    nums[idx] = nums[j];
-                    nums[j] = 0;
-                    idx = j;
-                } else if (nums[j] == 0 && idx == -1) {
-                    idx = j;
-                }
+        for (int i = 0; i < nums.length; i++) {
+            if (!q.isEmpty()) {
+                nums[i] = nums[q.poll()];
+            } else {
+                nums[i] = 0;
             }
         }
 

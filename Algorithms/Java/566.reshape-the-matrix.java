@@ -9,18 +9,19 @@ class Solution {
 
     public int[][] matrixReshape(int[][] mat, int r, int c) {
 
-        int[][] ans = new int[r][c];
-        int idx = 0;
         int h = mat.length;
         int w = mat[0].length;
 
-        if (h * w != r * c)
+        if (r * c != h * w)
             return mat;
+
+        int[][] ans = new int[r][c];
+        int count = 0;
 
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
-                ans[idx / c][idx % c] = mat[i][j];
-                idx++;
+                ans[count / c][count % c] = mat[i][j];
+                count++;
             }
         }
 

@@ -1,3 +1,5 @@
+import javax.management.ListenerNotFoundException;
+
 /*
  * @lc app=leetcode id=876 lang=java
  *
@@ -19,15 +21,15 @@ class Solution {
 
     public ListNode middleNode(ListNode head) {
 
-        var slowNode = head;
-        var fastNode = head;
+        ListNode slow = head;
+        ListNode fast = head;
 
-        while (fastNode != null && fastNode.next != null) {
-            slowNode = slowNode.next;
-            fastNode = fastNode.next.next;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
 
-        return slowNode;
+        return slow;
     }
 }
 // @lc code=end

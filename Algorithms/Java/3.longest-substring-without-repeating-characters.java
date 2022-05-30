@@ -13,23 +13,24 @@ class Solution {
 
     public int lengthOfLongestSubstring(String s) {
 
-        int maxLength = 0;
-        int head = 0;
-        int tail = 0;
-        HashMap<Character, Boolean> seen = new HashMap<>();
+        int left = -1;
+        int right = 0;
+        int max = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
 
-        while (tail < s.length()) {
-            while (seen.get(s.charAt(tail)) != null) {
-                head++;
-                seen.remove(s.charAt(head - 1));
+        while (right < s.length()) {
+            char ch = s.charAt(right);
+            System.out.println(ch + " " + map.getOrDefault(ch, -1));
+            if (map.get(ch) != null) {
+                left = Math.max(left, map.get(ch));
             }
-            // System.out.println(head + ", " + tail);
-            maxLength = Math.max(maxLength, tail - head + 1);
-            seen.put(s.charAt(tail), true);
-            tail++;
+            map.put(ch, right);
+            System.out.println(left + " " + right);
+            max = Math.max(max, right - left);
+            right++;
         }
 
-        return maxLength;
+        return max;
     }
 }
 // @lc code=end

@@ -15,20 +15,21 @@ class Solution {
 
     public boolean isValid(String s) {
 
+        Stack<Character> stack = new Stack<>();
         HashMap<Character, Character> map = new HashMap<>();
         map.put(')', '(');
-        map.put('}', '{');
         map.put(']', '[');
+        map.put('}', '{');
 
-        Stack<Character> stack = new Stack<>();
         for (int i = 0; i < s.length(); i++) {
-            var c = s.charAt(i);
-            if (map.get(c) != null) {
-                if (stack.isEmpty() || stack.peek() != map.get(c))
-                    return false;
-                stack.pop();
+            char ch = s.charAt(i);
+            if (map.get(ch) == null) {
+                stack.add(ch);
             } else {
-                stack.push(c);
+                if (stack.isEmpty() || stack.peek() != map.get(ch)) {
+                    return false;
+                }
+                stack.pop();
             }
         }
 

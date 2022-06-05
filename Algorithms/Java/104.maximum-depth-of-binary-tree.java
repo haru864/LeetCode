@@ -24,29 +24,20 @@ import javax.swing.tree.TreeNode;
  */
 class Solution {
 
-    public int depth = 0;
-
     public int maxDepth(TreeNode root) {
 
-        if (root == null)
-            return 0;
-
-        maxDepthHelper(root, 0);
-
-        return this.depth;
+        return maxDepthHelper(root, 1);
     }
 
-    public void maxDepthHelper(TreeNode node, int count) {
+    public int maxDepthHelper(TreeNode node, int depth) {
 
-        count++;
-        this.depth = Math.max(this.depth, count);
+        if (node == null)
+            return depth - 1;
 
-        if (node.left != null)
-            maxDepthHelper(node.left, count);
-        if (node.right != null)
-            maxDepthHelper(node.right, count);
+        int leftDepth = maxDepthHelper(node.left, depth + 1);
+        int rightDepth = maxDepthHelper(node.right, depth + 1);
 
-        return;
+        return Math.max(leftDepth, rightDepth);
     }
 }
 // @lc code=end

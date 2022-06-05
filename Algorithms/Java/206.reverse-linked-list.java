@@ -24,25 +24,17 @@ class Solution {
 
     public ListNode reverseList(ListNode head) {
 
-        if (head == null)
-            return null;
-
-        Queue<ListNode> q = new ArrayDeque<>();
-        q.add(head);
         ListNode prev = null;
+        ListNode currNode = head;
 
-        while (q.size() > 0) {
-            ListNode currNode = q.poll();
+        while (currNode != null) {
             ListNode next = currNode.next;
             currNode.next = prev;
             prev = currNode;
-            if (next == null)
-                return currNode;
-            else
-                q.add(next);
+            currNode = next;
         }
 
-        return null;
+        return prev;
     }
 }
 // @lc code=end

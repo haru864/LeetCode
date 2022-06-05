@@ -1,7 +1,3 @@
-import java.time.chrono.MinguoChronology;
-
-import javax.management.ListenerNotFoundException;
-
 /*
  * @lc app=leetcode id=21 lang=java
  *
@@ -23,25 +19,24 @@ class Solution {
 
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 
-        ListNode dummyNode = new ListNode(0);
-        var tempNode = dummyNode;
+        ListNode dummyNode = new ListNode(-1);
+        var head = dummyNode;
 
-        while (list1 != null || list2 != null) {
-
-            int v1 = (list1 == null) ? Integer.MAX_VALUE : list1.val;
-            int v2 = (list2 == null) ? Integer.MAX_VALUE : list2.val;
-
-            if (v1 > v2) {
-                tempNode.next = list2;
-                list2 = list2.next;
-            } else {
-                tempNode.next = list1;
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                head.next = list1;
                 list1 = list1.next;
+            } else {
+                head.next = list2;
+                list2 = list2.next;
             }
-
-            tempNode = tempNode.next;
+            head = head.next;
         }
-        // System.out.println(tempNode.val);
+
+        if (list1 != null)
+            head.next = list1;
+        if (list2 != null)
+            head.next = list2;
 
         return dummyNode.next;
     }
